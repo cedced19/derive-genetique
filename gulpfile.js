@@ -14,7 +14,7 @@ var gulp = require('gulp'),
 gulp.task('html', function () {
     var assets = useref.assets();
 
-    return gulp.src(['dev/*.html', 'dev/views/*.html'])
+    return gulp.src('dev/*.html')
         .pipe(assets)
         .pipe(gulpif('*.js', uglify()))
         .pipe(gulpif('*.css', autoprefixer({
@@ -25,6 +25,13 @@ gulp.task('html', function () {
         .pipe(useref())
         .pipe(gulpif('*.html', htmlmin({collapseWhitespace: true})))
         .pipe(gulp.dest('./'));
+});
+
+gulp.task('views', function () {
+
+    return gulp.src('dev/views/*.html')
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./views'));
 });
 
 gulp.task('reload', function () {
@@ -46,4 +53,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('serve', ['connect', 'watch']);
-gulp.task('default', ['html']);
+gulp.task('default', ['html', 'views']);
