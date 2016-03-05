@@ -2,7 +2,7 @@ angular.module('DeriveGenetique', ['ngRoute', 'chart.js'])
 .config(['$routeProvider', function($routeProvider){
         $routeProvider
         .when('/', {
-            templateUrl: '/views/index.html',
+            templateUrl: './views/index.html',
             controller: 'DeriveGenetiqueIndexCtrl'
         })
 }])
