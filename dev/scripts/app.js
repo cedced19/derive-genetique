@@ -118,42 +118,51 @@ angular.module('DeriveGenetique', ['ngRoute', 'chart.js'])
     return true;
   };
 
-  $scope.others = [];
-  $scope.start = random({
-    red: 8,
-    green: 8,
-    blue: 4,
-    yellow: 4,
-    total: 5
-  }, function (start) {
-    $scope.others.push(start);
-    while ($scope.others.length != 11 && check($scope.others[$scope.others.length-1])) {
-      $scope.others.push(generate(random($scope.others[$scope.others.length-1])));
-    };
-    $scope.others.shift();
-
-    var red = [],
-        green = [],
-        blue = [],
-        yellow = [];
-    $scope.others.forEach(function (value) {
-      red.push(Math.round(value.red/value.total*100));
-      green.push(Math.round(value.green/value.total*100));
-      blue.push(Math.round(value.blue/value.total*100));
-      yellow.push(Math.round(value.yellow/value.total*100));
-    });
-    $scope.data = [];
-    $scope.data.push(red, green, blue, yellow);
-
-    $scope.labels = [];
-    var n = $scope.others.length;
-    while (n) {
-      $scope.labels.push(($scope.others.length-n+1) + 'ème')
-      n--;
-    }
-  });
-
   $scope.round = Math.round;
+  $scope.print = function () {
+    window.print();
+  };
 
   $scope.series = ['Rouges', 'Verts', 'Bleus', 'Jaunes'];
+
+  $scope.create = function () {
+
+    $scope.others = [];
+    $scope.start = random({
+      red: 8,
+      green: 8,
+      blue: 4,
+      yellow: 4,
+      total: 5
+    }, function (start) {
+      $scope.others.push(start);
+      while ($scope.others.length != 11 && check($scope.others[$scope.others.length-1])) {
+        $scope.others.push(generate(random($scope.others[$scope.others.length-1])));
+      };
+      $scope.others.shift();
+
+      var red = [],
+          green = [],
+          blue = [],
+          yellow = [];
+      $scope.others.forEach(function (value) {
+        red.push(Math.round(value.red/value.total*100));
+        green.push(Math.round(value.green/value.total*100));
+        blue.push(Math.round(value.blue/value.total*100));
+        yellow.push(Math.round(value.yellow/value.total*100));
+      });
+      $scope.data = [];
+      $scope.data.push(red, green, blue, yellow);
+
+      $scope.labels = ['1ère'];
+      var n = $scope.others.length-1;
+      while (n) {
+        $scope.labels.push(($scope.others.length-n+1) + 'ème')
+        n--;
+      }
+    });
+  };
+
+  $scope.create();
+
 }]);
