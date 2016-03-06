@@ -306,3 +306,21 @@ footer p {
         display: none;
     }
 }
+@media (max-width: 900px) {
+    header p {
+        display: none;
+    }
+    header {
+        height: 70px;
+    }
+}
+@media (max-width: 740px) {
+    .forkme {
+        display: none;
+    }
+}
+@media (max-width: 400px) {
+    header {
+        height: 120px;
+    }
+}
